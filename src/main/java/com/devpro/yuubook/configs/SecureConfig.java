@@ -1,5 +1,6 @@
 package com.devpro.yuubook.configs;
 
+import com.devpro.yuubook.models.bo.Oauth2LoginSuccessHandler;
 import com.devpro.yuubook.services.impl.Oauth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +25,9 @@ public class SecureConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private Oauth2UserService oauth2UserService;
+
+    @Autowired
+    private Oauth2LoginSuccessHandler oauth2LoginSuccessHandler;
 
     /**
      * đây là nơi thực hiện cấu hình bảo mật cho website.
@@ -78,6 +82,7 @@ public class SecureConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login")
                     .userInfoEndpoint().userService(oauth2UserService)
                     .and()
+                .successHandler(oauth2LoginSuccessHandler)
                 .and()
 
                 .exceptionHandling()
