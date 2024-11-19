@@ -7,4 +7,6 @@ import java.util.List;
 public interface BookService {
 
     List<Book> getLimitedProductsHot(int limit);
+
+    List<Book> searchBooksByKeyword(String keyword);
 }

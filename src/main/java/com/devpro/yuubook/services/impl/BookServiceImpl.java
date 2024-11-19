@@ -17,4 +17,9 @@ public class BookServiceImpl implements BookService {
     public List<Book> getLimitedProductsHot(int limit) {
         return bookRepo.getLimitedProductsHot(limit);
     }
+
+    @Override
+    public List<Book> searchBooksByKeyword(String keyword) {
+        return bookRepo.getAllBookByKeyword(keyword.trim());
+    }
 }

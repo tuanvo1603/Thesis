@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -30,5 +31,12 @@ public class HomeController extends BaseController{
         model.addAttribute("parentCateShowHome",
                 categoryService.getParentCategoryWithLimitedProduct(Constant.HOME_LIMITED_PRODUCT_CATEGORY));
         return "index";
+    }
+
+    @GetMapping("/search")
+    public String searchProduct(ModelMap model, @RequestParam("q") String keyword) {
+        model.addAttribute("books", bookService.searchBooksByKeyword(keyword));
+        model.addAttribute("keyword", keyword);
+        return "product-search";
     }
 }
