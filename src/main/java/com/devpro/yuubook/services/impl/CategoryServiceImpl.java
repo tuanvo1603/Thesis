@@ -65,4 +65,8 @@ public class CategoryServiceImpl implements CategoryService {
         }
         return categoryDTOs;
     }
+
+    public List<Category> getAllParentCategories() {
+        return categoryRepo.findAllParentCategories();
+    }
 }

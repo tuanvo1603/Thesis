@@ -12,4 +12,6 @@ public interface BookService {
     List<Book> searchBooksByKeyword(String keyword);
 
     List<BookDTO> ajaxSearchBooksByKeyword(String keyword, int limit);
+
+    Book getBySlug(String slug);
 }

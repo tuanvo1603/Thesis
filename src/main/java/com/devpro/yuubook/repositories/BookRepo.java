@@ -22,4 +22,6 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
 	@Query("select b from Book b inner join Author a on b.author.id = a.id"
 			+ " where concat(b.name, ' ', a.name, ' ') like %?1% and b.status = true")
 	List<Book> getAllBookByKeyword(String keyword);
+
+	Book findBySlug(String slug);
 }

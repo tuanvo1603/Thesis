@@ -10,4 +10,6 @@ public interface CategoryService {
 	List<CategoryDTO> getSubCategoryWithLimitedProduct(int limit);
 	
 	List<CategoryDTO> getParentCategoryWithLimitedProduct(int limit);
+
+	List<Category> getAllParentCategories();
 }

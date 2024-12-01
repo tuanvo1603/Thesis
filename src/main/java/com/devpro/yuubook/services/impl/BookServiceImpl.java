@@ -5,6 +5,7 @@ import com.devpro.yuubook.models.entities.Book;
 import com.devpro.yuubook.repositories.BookRepo;
 import com.devpro.yuubook.services.BookService;
 import com.devpro.yuubook.services.mappers.BookMapper;
+import com.devpro.yuubook.utils.FuncUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +33,12 @@ public class BookServiceImpl implements BookService {
     public List<BookDTO> ajaxSearchBooksByKeyword(String keyword, int limit) {
         List<Book> books = bookRepo.getAllBookByKeyword(keyword.trim());
         return bookMapper.toDTO(books, limit);
+    }
+
+    @Override
+    public Book getBySlug(String slug) {
+        Book book = bookRepo.findBySlug(slug);
+        book.setStarAvg(FuncUtils.calculatorStar(book));
+        return book;
     }
 }
