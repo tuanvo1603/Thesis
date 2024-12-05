@@ -69,4 +69,9 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> getAllParentCategories() {
         return categoryRepo.findAllParentCategories();
     }
+
+    @Override
+    public Category getBySlug(String slug) {
+        return categoryRepo.findBySlug(slug);
+    }
 }

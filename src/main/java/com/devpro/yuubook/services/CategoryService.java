@@ -12,4 +12,6 @@ public interface CategoryService {
 	List<CategoryDTO> getParentCategoryWithLimitedProduct(int limit);
 
 	List<Category> getAllParentCategories();
+
+	Category getBySlug(String slug);
 }

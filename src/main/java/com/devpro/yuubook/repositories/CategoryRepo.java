@@ -18,4 +18,6 @@ public interface CategoryRepo extends JpaRepository<Category, Integer> {
 	@Query("select distinct c from Category c left join fetch c.books b where c.id = b.category.id "
 			+ "order by c.createdDate asc, b.createdDate desc")
 	List<Category> getAllSubCategoryWithProduct();
+
+	Category findBySlug(String slug);
 }
