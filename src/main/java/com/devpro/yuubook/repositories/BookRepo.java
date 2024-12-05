@@ -24,4 +24,10 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
 	List<Book> getAllBookByKeyword(String keyword);
 
 	Book findBySlug(String slug);
+
+	@Query(value = "select * from book where hot = 1 and status = 1", nativeQuery = true)
+	Page<Book> getAllByHot(Pageable pageable);
+
+	@Query(value = "select * from book where category_id = ?1 and status = 1", nativeQuery = true)
+	Page<Book> getAllByCategory(int id, Pageable pageable);
 }

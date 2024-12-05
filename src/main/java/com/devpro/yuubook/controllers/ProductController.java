@@ -45,4 +45,26 @@ public class ProductController extends BaseController {
         model.addAttribute("book", bookService.getBySlug(slug));
         return "single-product";
     }
+
+    @GetMapping("/product/hot")
+    public String productHot(ModelMap model, HttpServletRequest request,
+                             @RequestParam(value = "page", defaultValue = "1") int currentPage,
+                             @RequestParam(value = "sort", defaultValue = "newest") String sortBy) {
+        HttpSession httpSession = request.getSession();
+        httpSession.setAttribute("SORT", sortBy);
+
+        Page<Book> books = bookService.getAllByCategoryAndSort
+                (null, currentPage, sortBy, Constant.LIMITED_PRODUCT_HOT);
+
+        List<Book> bookList = books.getContent();
+
+        for (Book book : bookList) {
+            book.setStarAvg(FuncUtils.calculatorStar(book));
+        }
+        model.addAttribute("books", bookList);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", books.getTotalPages());
+        model.addAttribute("author", authorService.getAll());
+        return "product-list-hot";
+    }
 }

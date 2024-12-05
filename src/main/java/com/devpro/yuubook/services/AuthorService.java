@@ -9,4 +9,6 @@ import java.util.List;
 public interface AuthorService {
 
     List<AuthorDTO> getAuthorWithLimitedProduct(int l);
+
+    List<Author> getAll();
 }

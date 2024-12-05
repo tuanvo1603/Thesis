@@ -27,4 +27,8 @@ public class AuthorServiceImpl implements AuthorService {
         List<Author> authors = authorRepo.getAllAuthorWithProductOrderByCreateDateDesc();
         return authorMapper.toDTO(authors, limit);
     }
+
+    public List<Author> getAll() {
+        return authorRepo.findAll();
+    }
 }

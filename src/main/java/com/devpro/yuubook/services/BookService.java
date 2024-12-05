@@ -2,6 +2,8 @@ package com.devpro.yuubook.services;
 
 import com.devpro.yuubook.models.dto.BookDTO;
 import com.devpro.yuubook.models.entities.Book;
+import com.devpro.yuubook.models.entities.Category;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -14,4 +16,6 @@ public interface BookService {
     List<BookDTO> ajaxSearchBooksByKeyword(String keyword, int limit);
 
     Book getBySlug(String slug);
+
+    Page<Book> getAllByCategoryAndSort(Category category, int currentPage, String sortBy, int recordsPerPage);
 }
