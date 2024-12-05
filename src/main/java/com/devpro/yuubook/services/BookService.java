@@ -18,4 +18,6 @@ public interface BookService {
     Book getBySlug(String slug);
 
     Page<Book> getAllByCategoryAndSort(Category category, int currentPage, String sortBy, int recordsPerPage);
+
+    Book getById(Integer id);
 }

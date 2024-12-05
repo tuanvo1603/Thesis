@@ -81,4 +81,11 @@ public class BookServiceImpl implements BookService {
         }
         return sort;
     }
+
+    public Book getById(Integer id) {
+        Book book = bookRepo.findById(id).orElse(null);
+        if (book == null) return null;
+        book.setStarAvg(FuncUtils.calculatorStar(book));
+        return book;
+    }
 }
