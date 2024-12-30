@@ -30,4 +30,7 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
 
 	@Query(value = "select * from book where category_id = ?1 and status = 1", nativeQuery = true)
 	Page<Book> getAllByCategory(int id, Pageable pageable);
+
+	@Query(value = "select * from book where author_id = ?1 and status = 1", nativeQuery = true)
+	Page<Book> getAllByAuthor(int id, Pageable pageable);
 }

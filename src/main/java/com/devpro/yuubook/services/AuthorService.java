@@ -11,4 +11,6 @@ public interface AuthorService {
     List<AuthorDTO> getAuthorWithLimitedProduct(int l);
 
     List<Author> getAll();
+
+    Author getBySlug(String slug);
 }

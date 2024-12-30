@@ -8,4 +8,5 @@ public interface Constant {
 	Integer LIMITED_PRODUCT_HOT = 8;
 	Integer LIMITED_PRODUCT_CATEGORY = 8;
 	Integer LIMITED_PRODUCT_EACH_CATEGORY = 4;
+	Integer LIMITED_PRODUCT_AUTHOR = 8;
 }

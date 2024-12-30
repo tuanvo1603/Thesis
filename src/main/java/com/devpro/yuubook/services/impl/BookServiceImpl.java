@@ -1,6 +1,7 @@
 package com.devpro.yuubook.services.impl;
 
 import com.devpro.yuubook.models.dto.BookDTO;
+import com.devpro.yuubook.models.entities.Author;
 import com.devpro.yuubook.models.entities.Book;
 import com.devpro.yuubook.models.entities.Category;
 import com.devpro.yuubook.repositories.BookRepo;
@@ -87,5 +88,14 @@ public class BookServiceImpl implements BookService {
         if (book == null) return null;
         book.setStarAvg(FuncUtils.calculatorStar(book));
         return book;
+    }
+
+    @Override
+    public Page<Book> getAllByAuthorAndSort(Author author,
+                                            int currentPage,
+                                            String sortBy,
+                                            int recordsPerPage) {
+        Pageable pageable = PageRequest.of(currentPage - 1, recordsPerPage, setSort(sortBy));
+        return bookRepo.getAllByAuthor(author.getId(), pageable);
     }
 }

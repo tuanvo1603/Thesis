@@ -1,6 +1,7 @@
 package com.devpro.yuubook.services;
 
 import com.devpro.yuubook.models.dto.BookDTO;
+import com.devpro.yuubook.models.entities.Author;
 import com.devpro.yuubook.models.entities.Book;
 import com.devpro.yuubook.models.entities.Category;
 import org.springframework.data.domain.Page;
@@ -20,4 +21,6 @@ public interface BookService {
     Page<Book> getAllByCategoryAndSort(Category category, int currentPage, String sortBy, int recordsPerPage);
 
     Book getById(Integer id);
+
+    Page<Book> getAllByAuthorAndSort(Author author, int currentPage, String sortBy, int recordsPerPage);
 }

@@ -31,4 +31,9 @@ public class AuthorServiceImpl implements AuthorService {
     public List<Author> getAll() {
         return authorRepo.findAll();
     }
+
+    @Override
+    public Author getBySlug(String slug) {
+        return authorRepo.findBySlug(slug);
+    }
 }
