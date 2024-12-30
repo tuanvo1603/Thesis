@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.devpro.yuubook.models.bo.Provider;
+import com.devpro.yuubook.models.entities.Book;
+import com.devpro.yuubook.models.entities.BookFavorite;
+import com.devpro.yuubook.repositories.BookFavoriteRepo;
+import com.devpro.yuubook.services.BookService;
 import com.devpro.yuubook.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,6 +31,10 @@ public class UserServiceImpl implements UserService {
     private RoleRepo roleRepo;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private BookService bookService;
+    @Autowired
+    private BookFavoriteRepo bookFavoriteRepo;
 
     @Override
     public User getUserByEmail(String email) {
@@ -96,5 +104,19 @@ public class UserServiceImpl implements UserService {
         saveImage(user, file);
 
         return userRepo.save(user);
+    }
+
+    @Override
+    public void addFavoriteBookByUserLogin(User userLogin, int id) {
+        Book book = bookService.getById(id);
+        BookFavorite bookFavorite = new BookFavorite();
+        bookFavorite.setBook(book);
+        bookFavorite.setUser(userLogin);
+        bookFavoriteRepo.save(bookFavorite);
+    }
+
+    @Override
+    public void removeFavoriteBookByUserLogin(User userLogin, int id) {
+        bookFavoriteRepo.deleteByUserAndBook(userLogin.getId(), id);
     }
 }

@@ -21,4 +21,8 @@ public interface UserService {
 	int getTotalNumberOfUsers();
 
     User updateAvatar(MultipartFile file, User userLogin) throws IOException;
+
+	void addFavoriteBookByUserLogin(User userLogin, int id);
+
+	void removeFavoriteBookByUserLogin(User userLogin, int id);
 }
