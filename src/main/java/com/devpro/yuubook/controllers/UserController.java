@@ -2,6 +2,8 @@ package com.devpro.yuubook.controllers;
 
 import java.io.IOException;
 
+import com.devpro.yuubook.models.entities.Order;
+import com.devpro.yuubook.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,8 @@ public class UserController extends BaseController {
     private ProvinceRepo provinceRepo;
     @Autowired
     private UserAddressService userAddressService;
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("")
     public String index(ModelMap model) {
@@ -37,6 +41,29 @@ public class UserController extends BaseController {
     public String personalInformation(ModelMap model) {
         model.addAttribute("user", userService.getUserByEmail(userLogin().getEmail()));
         return "user/personal-info";
+    }
+
+    @GetMapping("/order")
+    public String userOrder(ModelMap model) {
+        model.addAttribute("orders", orderService.getOrdersByUserLogin(userLogin()));
+        return "user/user-order";
+    }
+
+    @PostMapping("/order/delete/{id}")
+    public ResponseEntity<AjaxResponse> deleteOrder(ModelMap model, @PathVariable("id") Integer id)
+            throws IllegalStateException, IOException {
+        Order order = orderService.getOrderById(id);
+        if (order.getOrderStatus() != 0) {
+            return ResponseEntity.ok(new AjaxResponse("Không thể hủy đơn hàng này.", 400));
+        }
+        orderService.deleteOrderById(id);
+        return ResponseEntity.ok(new AjaxResponse("Hủy thành công.", 200));
+    }
+
+    @GetMapping("/order/deleted")
+    public String orderDeleted(ModelMap model) {
+        model.addAttribute("orders", orderService.getOrdersDeletedByUserLogin(userLogin()));
+        return "user/order-deleted";
     }
 
     @GetMapping("/address")
